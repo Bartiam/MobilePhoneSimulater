@@ -1,0 +1,7 @@
+cmake_minimum_required(VERSION 3.26.3)
+
+set(PROJECT_NAME MobilePhoneSimulater)
+
+project(${PROJECT_NAME})
+
+add_executable(${PROJECT_NAME} src/main.cpp)
