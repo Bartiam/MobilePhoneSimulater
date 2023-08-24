@@ -1,5 +1,13 @@
 #include "phone.h"
 
+std::string Contact::getName() {return name;}
+
+std::string Contact::getPhoneNumber() {return phoneNumber;}
+
+void Contact::setName(const std::string& name) {this->name = name;}
+
+void Contact::setPhoneNumber(const std::string& phoneNumber) {this->phoneNumber = phoneNumber;}
+
 bool Phone::phone_number_format(const std::string& phoneNumber)
 {
 	if (phoneNumber.length() != 12) return false;
@@ -38,11 +46,11 @@ void Phone::send_message(const std::string& nameOrPhoneNumber)
 
 		for (int i = 0; i < contacts.size(); ++i)
 		{
-			if (contacts[i].name == nameOrPhoneNumber)
+			if (contacts[i].getName() == nameOrPhoneNumber)
 			{
 				std::cout << "A message has been sent to the contact: " <<
-					"\nName: " << contacts[i].name <<
-					"\nPhone number: " << contacts[i].phoneNumber << std::endl;
+					"\nName: " << contacts[i].getName() <<
+					"\nPhone number: " << contacts[i].getPhoneNumber() << std::endl;
 				return;
 			}
 		}
@@ -60,11 +68,11 @@ void Phone::send_message(const std::string& nameOrPhoneNumber)
 
 		for (int i = 0; i < contacts.size(); ++i)
 		{
-			if (contacts[i].phoneNumber == nameOrPhoneNumber)
+			if (contacts[i].getPhoneNumber() == nameOrPhoneNumber)
 			{
 				std::cout << "A message has been sent to the contact: " <<
-					"\nName: " << contacts[i].name <<
-					"\nPhone number: " << contacts[i].phoneNumber << std::endl;
+					"\nName: " << contacts[i].getName() <<
+					"\nPhone number: " << contacts[i].getPhoneNumber() << std::endl;
 				return;
 			}
 		}
@@ -93,11 +101,11 @@ void Phone::call(const std::string& nameOrPhoneNumber)
 
 		for (int i = 0; i < contacts.size(); ++i)
 		{
-			if (contacts[i].name == nameOrPhoneNumber)
+			if (contacts[i].getName() == nameOrPhoneNumber)
 			{
 				std::cout << "The call was made to the contact: " <<
-					"\nName: " << contacts[i].name <<
-					"\nPhone number: " << contacts[i].phoneNumber << std::endl;
+					"\nName: " << contacts[i].getName() <<
+					"\nPhone number: " << contacts[i].getPhoneNumber() << std::endl;
 				return;
 			}
 		}
@@ -115,11 +123,11 @@ void Phone::call(const std::string& nameOrPhoneNumber)
 
 		for (int i = 0; i < contacts.size(); ++i)
 		{
-			if (contacts[i].phoneNumber == nameOrPhoneNumber)
+			if (contacts[i].getPhoneNumber() == nameOrPhoneNumber)
 			{
 				std::cout << "The call was made to the contact: " <<
-					"\nName: " << contacts[i].name <<
-					"\nPhone number: " << contacts[i].phoneNumber << std::endl;
+					"\nName: " << contacts[i].getName() <<
+					"\nPhone number: " << contacts[i].getPhoneNumber() << std::endl;
 				return;
 			}
 		}
@@ -142,7 +150,10 @@ std::string Phone::add(const std::string& name, const std::string& phoneNumber)
 		std::cerr << "Error! Incorrect input name. Try again. " << std::endl;
 		return "Error! ";
 	}
-	contacts.push_back({ name, phoneNumber });
+	Contact contact;
+	contact.setName(name);
+	contact.setPhoneNumber(phoneNumber);
+	contacts.push_back(contact);
 	std::cout << "\nThe contact: " << "\nName: " << name <<
 		"\nPhone number: " << phoneNumber << "\nadded to contact list. " << std::endl;
 	return "add";
